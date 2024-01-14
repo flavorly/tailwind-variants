@@ -314,6 +314,22 @@ describe("Tailwind Variants (TV) - Default", () => {
 
     expect(h1({color: "green", isUnderline: false})).toBe(expectedResult);
   });
+
+  test("should treat undefined and false identically for boolean variants", () => {
+    const h1 = tv({
+      base: "text-3xl",
+      variants: {
+        bool: {
+          true: "underline",
+          false: "no-underline",
+        },
+      },
+    });
+
+    expect(h1({bool: true})).toBe("text-3xl underline");
+    expect(h1({bool: false})).toBe("text-3xl no-underline");
+    expect(h1()).toBe("text-3xl no-underline");
+  });
 });
 
 describe("Tailwind Variants (TV) - Slots", () => {
